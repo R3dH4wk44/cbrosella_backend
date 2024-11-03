@@ -1,0 +1,24 @@
+POST http://localhost:8080/api/users/login
+Content-Type: application/json
+
+{
+    "email": "jane@example.com",
+    "password": "password456"
+}
+
+
+### POST to check admin
+POST http://localhost:8080/api/users/admin
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjZjc2NWM3LTIzY2ItNDhhNy04MDMwLTgwMWY0ODc0NTdhNCIsImVtYWlsIjoiamFuZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJKYW5lIFNtaXRoIiwicGhvbmUiOiIwOTg3NjU0MzIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMwNjM1MTczLCJleHAiOjE3MzA2Mzg3NzN9.wvkRaWFNF-d0-q8h8vmGvbUf_Q_8gnKnevoqkffuXzk
+
+### Crear un equipo
+POST http://localhost:8080/api/teams/create
+Content-Type: application/json
+
+{
+    "name": "Junior Masculí Vermell",
+    "description": "El nostre junior masculí entrenat per el Jordi Jané juga a la categoría B-2",
+    "image_url": "https://picsum.photoparamss/200/300",
+    "category_id": 2
+}

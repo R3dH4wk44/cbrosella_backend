@@ -1,17 +1,17 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";  -- Habilita la extensión para UUIDs en PostgreSQL
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";  
 
 CREATE TABLE IF NOT EXISTS users (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),       -- UUID único generado automáticamente
-    name VARCHAR(100) NOT NULL,                           -- Nombre del usuario
-    email VARCHAR(100) UNIQUE NOT NULL,                   -- Email único
-    phone VARCHAR(15),                                    -- Teléfono de contacto
-    password VARCHAR(255) NOT NULL,                       -- Contraseña encriptada
-    is_admin BOOLEAN DEFAULT FALSE,                       -- Indica si es administrador (por defecto FALSE)
-    created_at TIMESTAMP DEFAULT NOW()                    -- Fecha de creación
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),       
+    name VARCHAR(100) NOT NULL,                           
+    email VARCHAR(100) UNIQUE NOT NULL,                   
+    phone VARCHAR(15),                                    
+    password VARCHAR(255) NOT NULL,                       
+    is_admin BOOLEAN DEFAULT FALSE,                       
+    created_at TIMESTAMP DEFAULT NOW()                    
 );
 
 CREATE TABLE IF NOT EXISTS category (
-    id SERIAL PRIMARY KEY,                                -- Autoincrementable en PostgreSQL
+    id SERIAL PRIMARY KEY,                                
     name VARCHAR(100) NOT NULL,
     description TEXT
 );
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS teams (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     category_id INT NOT NULL,
-    image_url VARCHAR(255),                               -- URL para almacenar la imagen de Cloudflare
+    image_url VARCHAR(255),                               
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS post (
     title VARCHAR(100) NOT NULL,
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
-    featured_image VARCHAR(255)                           -- URL para almacenar la imagen de Cloudflare
+    featured_image VARCHAR(255)                           
 );
 
 CREATE TABLE IF NOT EXISTS game (
@@ -56,7 +56,9 @@ CREATE TABLE IF NOT EXISTS products (
     price DECIMAL(10, 2) NOT NULL,
     quantity INT NOT NULL,
     product_category_id UUID NOT NULL,
-    featured_image VARCHAR(255),                     -- URL para la imagen destacada
-    additional_images TEXT[],                        -- Array de URLs para imágenes adicionales
+    featured_image VARCHAR(255),                     
+    additional_images TEXT[],                        
     FOREIGN KEY (product_category_id) REFERENCES products_category(id)
 );
+
+            
