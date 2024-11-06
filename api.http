@@ -10,7 +10,7 @@ Content-Type: application/json
 ### POST to check admin
 POST http://localhost:8080/api/users/admin
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjZjc2NWM3LTIzY2ItNDhhNy04MDMwLTgwMWY0ODc0NTdhNCIsImVtYWlsIjoiamFuZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJKYW5lIFNtaXRoIiwicGhvbmUiOiIwOTg3NjU0MzIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMwNjM1MTczLCJleHAiOjE3MzA2Mzg3NzN9.wvkRaWFNF-d0-q8h8vmGvbUf_Q_8gnKnevoqkffuXzk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhjZjc2NWM3LTIzY2ItNDhhNy04MDMwLTgwMWY0ODc0NTdhNCIsImVtYWlsIjoiamFuZUBleGFtcGxlLmNvbSIsIm5hbWUiOiJKYW5lIFNtaXRoIiwicGhvbmUiOiIwOTg3NjU0MzIxIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzMwNzIwMjA5LCJleHAiOjE3MzA3MjM4MDl9.hwW7FAlLGucRNdKgTetFMQUUlsSIiQg58v6O7n4D_-Q
 
 ### Crear un equipo
 POST http://localhost:8080/api/teams/create
@@ -22,3 +22,40 @@ Content-Type: application/json
     "image_url": "https://picsum.photoparamss/200/300",
     "category_id": 2
 }
+
+### Borrar un equipo
+DELETE http://localhost:8080/api/teams/delete/fdbb28d3-0ffc-429f-a551-d408571c45de
+Content-Type: application/json
+
+
+### Modificar el equipo
+
+PUT http://localhost:8080/api/teams/update/fdbb28d3-0ffc-429f-a551-d408571c45de
+Content-Type: application/json
+
+{
+    "name": "Team A",
+    "description": "New Description for team A",
+    "category_id": 1
+}
+
+
+### GET games for teams
+
+GET http://localhost:8080/api/games/team/b5211da5-e7b5-4c5e-a353-d6e59d4151cb
+
+
+### CREATE A GAME
+
+POST http://localhost:8080/api/games/create
+Content-Type: application/json
+
+{
+    "team_id": "b5211da5-e7b5-4c5e-a353-d6e59d4151cb",
+    "rival": "CB. Viladecavalls",
+    "team_score": "80",
+    "rival_score": "50",
+    "is_local": false
+
+}
+

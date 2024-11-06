@@ -4,7 +4,8 @@ import  {z} from 'zod'
 
 const userLoginSchema = z.object({
     email: z.string().email(),
-    password: z.string().min(6, "La contraseña debe tener almenos 6 caracteres")  // En esta versión, la contraseña no es obligatoria, pero si se quiere hacer obligatoria, cambiar el optional() a required() en la validación de password.
+    password: z.string().min(6, "La contraseña debe tener almenos 6 caracteres"),
+    rememberMe: z.boolean()
 })
 
 

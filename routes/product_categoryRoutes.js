@@ -25,6 +25,7 @@ router.get('/', async (req, res) => {
     const result = await pool.query('INSERT INTO products_category (name,description) VALUES ($1,$2)', [name, description])
         res.json({ message: 'La categoria se ha creado correctamente'});
   })
-  // Otras rutas específicas para usuarios pueden ir aquí
+
+  
   
   export default router;
