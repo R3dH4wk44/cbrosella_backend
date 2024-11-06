@@ -4,7 +4,6 @@ import {pool} from '../db_config/db.js';
 const router = express.Router();
 
 
-// Ruta para obtener todos los posts
 router.get('/', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM post;');
@@ -15,7 +14,6 @@ router.get('/', async (req, res) => {
     }
   });
   
-// Ruta para obtener un post por id
 
 router.get('/:id', async function (req, res) {
   try {
@@ -30,7 +28,6 @@ router.get('/:id', async function (req, res) {
   }
 });
 
-// Ruta para crear un nuevo post
 
 router.post('/create', async (req, res) => {   
 
@@ -44,7 +41,6 @@ router.post('/create', async (req, res) => {
         res.json({ message: 'El post se ha creado correctamente'});
   });
 
-  // Ruta para actualizar un post por id
   router.put('/update/:id', async (req, res) => {
     const { title, content, featured_image } = req.body;
     const id = parseInt(req.params.id);
@@ -66,7 +62,6 @@ router.post('/create', async (req, res) => {
     res.json({ message: 'El post se ha actualizado correctamente' });
   });
 
-  // Ruta para eliminar un post por id
   router.delete('/delete/:id', async (req, res) => {
     const id = parseInt(req.params.id);
 

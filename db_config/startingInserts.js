@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 
-// Cargar las variables de entorno desde el archivo .env
 dotenv.config({ path: path.resolve('./backend/.env') });
 const { Pool } = pkg;
 const pool = new Pool({
@@ -15,7 +14,6 @@ const pool = new Pool({
 
 const insertData = async () => {
   try {
-    // Ejemplo de usuarios
     const password1 = await bcrypt.hash('password123', 10);
     const password2 = await bcrypt.hash('password456', 10);
     
@@ -30,7 +28,6 @@ const insertData = async () => {
 
     console.log('Usuarios insertados correctamente');
 
-    // Ejemplo de categorías
     const categoryId1 = 1;
     const categoryId2 = 2;
 
@@ -42,7 +39,6 @@ const insertData = async () => {
 
     console.log('Categorías insertadas correctamente');
 
-    // Ejemplo de equipos
     const teamId1 = uuidv4();
     const teamId2 = uuidv4();
 
@@ -54,7 +50,6 @@ const insertData = async () => {
 
     console.log('Equipos insertados correctamente');
 
-    // Ejemplo de publicaciones
     await pool.query(`
       INSERT INTO post (id, title, content, featured_image) VALUES
       (uuid_generate_v4(), 'Post Title 1', 'Content for post 1', 'https://example.com/image1.png'),
@@ -63,7 +58,6 @@ const insertData = async () => {
 
     console.log('Publicaciones insertadas correctamente');
 
-    // Ejemplo de productos
     const productCategoryId1 = uuidv4();
     const productCategoryId2 = uuidv4();
 
@@ -87,7 +81,7 @@ const insertData = async () => {
   } catch (error) {
     console.error('Error al insertar datos:', error);
   } finally {
-    await pool.end(); // Cerrar la conexión
+    await pool.end(); 
   }
 };
 

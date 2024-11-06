@@ -5,7 +5,6 @@ import { union } from 'zod';
 const router = express.Router();
 
 
-// Ruta para obtener todos los productos
 router.get('/all', async (req, res) => {
     try {
       const products = await pool.query('SELECT * FROM products;');
@@ -17,7 +16,6 @@ router.get('/all', async (req, res) => {
     }
   });
 
-  // Ruta para obtener un producto por ID
 
   router.get('/:id', async (req, res) => { 
     try {
@@ -30,7 +28,6 @@ router.get('/all', async (req, res) => {
     }
   });
 
-  // Ruta para escojer productos por categoría
 
   router.get('/:category', async (req, res) => {
     try {
@@ -44,11 +41,10 @@ router.get('/all', async (req, res) => {
   })
   
   
-  // Ruta para crear un producto
 
   router.post('/create', async (req, res) => {
     try {
-      // Validate request body
+
       const validatedData = productSchema.parse(req.body);
   
       const {
@@ -58,10 +54,9 @@ router.get('/all', async (req, res) => {
         quantity,
         product_category_id,
         featured_image,
-        additional_images = [], // default to an empty array if not provided
+        additional_images = [], 
       } = validatedData;
   
-      // Insert product into the database
       const result = await pool.query(
         `INSERT INTO products (name, description, price, quantity, product_category_id, featured_image, additional_images)
          VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -77,11 +72,9 @@ router.get('/all', async (req, res) => {
         ]
       );
   
-      // Respond with the created product
       res.status(201).json(result.rows[0]);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        // Handle validation error
         return res.status(400).json({ message: 'Invalid input data', errors: error.errors });
       }
       console.error('Error creating product:', error);
@@ -89,25 +82,21 @@ router.get('/all', async (req, res) => {
     }
   });
 
-  // Ruta para modificar un product
   router.put('/update/:id', async (req, res) => {
     try {
         const { name, description, price, quantity, product_category_id, featured_image, additional_images, } = req.body;
         const { id } = req.params;
         
 
-        // Fetch the existing data for the team
         const existingResult = await pool.query('SELECT * FROM products WHERE id = $1', [id]);
         const existingProduct = existingResult.rows[0];
 
-        // Check if the team exists
         if (!existingProduct) {
             return res.status(404).json({ message: 'El producto no fue encontrado' });
         }
 
-        // Merge existing data with the new data from the request
         const updatedProduct = {
-            name: name?? existingProduct.name,  // Use the new value if provided, otherwise use the existing value.
+            name: name?? existingProduct.name,  
             description: description ?? existingProduct.description,
             quantity: quantity ?? existingProduct.quantity,
             price: price ?? existingProduct.price,  
@@ -116,7 +105,6 @@ router.get('/all', async (req, res) => {
             additional_images: additional_images?? existingProduct.additional_images,  
         };
 
-        // Execute the update with the merged data
         const result = await pool.query(
             `UPDATE products 
              SET name = $1, description = $2, quantity = $3 , price = $4, product_category_od = $5, featured_image = $6, additional_images = $7
@@ -131,7 +119,6 @@ router.get('/all', async (req, res) => {
     }
 });
 
-  // Borrar producto por id
 
   router.delete('/delete/:id', async (req, res) => {
     try {

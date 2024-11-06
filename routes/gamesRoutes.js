@@ -4,7 +4,6 @@ import {pool} from '../db_config/db.js';
 const router = express.Router();
 
 
-// Ruta para obtener todos los partidos
 router.get('/all', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM game;');
@@ -15,7 +14,6 @@ router.get('/all', async (req, res) => {
     }
   });
   
-// Rura para seleccionar partidos por equipo
 
 router.get('/team/:id', async (req, res) => {
   const equipoId = req.params.id;
@@ -46,9 +44,7 @@ router.get('/team/:id', async (req, res) => {
     res.status(500).json({ error: 'Error al seleccionar partidos por equipo' });
   }
 })
-  // Otras rutas específicas para usuarios pueden ir aquí
   
-  // Ruta para crear un nuevo partido
 
   router.post('/create', async (req, res) => {
     const { team_id, rival, team_score, rival_score, is_local } = req.body;

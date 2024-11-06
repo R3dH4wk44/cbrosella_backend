@@ -4,7 +4,6 @@ import { teamCreateSchema } from '../shcemas/teamsSchema.js';
 const router = express.Router();
 
 
-// Ruta para obtener todos los equipos
 router.get('/', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM teams;');
@@ -15,7 +14,6 @@ router.get('/', async (req, res) => {
     }
   });
   
-  //Ruta para obtener un equipo por id
 
   router.get(':id', async (req, res) => {
     try {
@@ -31,12 +29,10 @@ router.get('/', async (req, res) => {
     }
   })
 
-  // Ruta para crear un equipo
 
   router.post('/create', async (req, res) => {
 
     try{
-      // Validacion de datos.
       teamCreateSchema.parse(req.body);
       try{
         const { name, description, category_id, image_url } = req.body;
@@ -55,7 +51,6 @@ router.get('/', async (req, res) => {
 
   })
 
-  //Borrar un equipo
 
   router.delete('/delete/:id', async (req,res)  =>{
     try{
@@ -73,7 +68,6 @@ router.get('/', async (req, res) => {
   })
 
 
-  //modificar un equipo 
 
   router.put('/update/:id', async (req, res) => {
     try {
@@ -81,24 +75,20 @@ router.get('/', async (req, res) => {
         const { id } = req.params;
         
 
-        // Fetch the existing data for the team
         const existingResult = await pool.query('SELECT * FROM teams WHERE id = $1', [id]);
         const existingTeam = existingResult.rows[0];
 
-        // Check if the team exists
         if (!existingTeam) {
             return res.status(404).json({ message: 'El equipo no fue encontrado' });
         }
 
-        // Merge existing data with the new data from the request
         const updatedTeam = {
-            name: name?? existingTeam.name,  // Use the new value if provided, otherwise use the existing value.
+            name: name?? existingTeam.name,  
             description: description ?? existingTeam.description,
             category_id: category_id ?? existingTeam.category_id,
             image_url: image_url ?? existingTeam.image_url,
         };
 
-        // Execute the update with the merged data
         const result = await pool.query(
             `UPDATE teams 
              SET description = $1, category_id = $2, image_url = $3 , name = $4

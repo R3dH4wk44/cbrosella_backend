@@ -3,7 +3,6 @@ import {pool} from '../db_config/db.js';
 const router = express.Router();
 
 
-// Ruta para obtener todos los usuarios
 router.get('/', async (req, res) => {
     try {
       const result = await pool.query('SELECT * FROM products_category;');

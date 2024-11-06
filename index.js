@@ -11,16 +11,16 @@ import gameRoute from './routes/gamesRoutes.js';
 import productsCategoryRoute from './routes/product_categoryRoutes.js';
 import productsRoute from './routes/productsRoutes.js';
 import cors from 'cors';
-// Cargar .env desde la carpeta backend
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Cargar .env desde la carpeta backend
+
 dotenv.config({ path: path.resolve(__dirname, './.env') });
 const app = express();
 const corsOptions = {
-  origin: process.env.ORIGIN_URL,  // Especifica el origen (tu frontend)
-  credentials: true,  // Permite el envío de cookies y credenciales
+  origin: process.env.ORIGIN_URL, 
+  credentials: true, 
 };
 
 app.use(cors(corsOptions));

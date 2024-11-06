@@ -1,4 +1,3 @@
-// createTables.js
 import pool from './db.js';
 
 const createTables = async () => {
